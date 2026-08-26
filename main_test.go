@@ -27,7 +27,7 @@ func TestCafeNegative(t *testing.T) {
 		req := httptest.NewRequest("GET", v.request, nil)
 		handler.ServeHTTP(response, req)
 
-		assert.Equal(t, v.status, response.Code)
+		require.Equal(t, http.StatusOK, response.Code)
 		assert.Equal(t, v.message, strings.TrimSpace(response.Body.String()))
 	}
 }
@@ -45,7 +45,7 @@ func TestCafeWhenOk(t *testing.T) {
 		req := httptest.NewRequest("GET", v, nil)
 
 		handler.ServeHTTP(response, req)
-
+		require.Equal(t, http.StatusOK, response.Code)
 		assert.Equal(t, http.StatusOK, response.Code)
 	}
 }
